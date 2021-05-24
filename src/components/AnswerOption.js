@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AnswerOption = (props) => {
-  const { optionIdx, answerText, selectThisOption } = props;
+  const { optionType, answerText, selectThisOption } = props;
   // console.log('optionIdx:', optionIdx);
   // console.log('selectThisOption:', selectThisOption);
   return (
@@ -9,7 +9,7 @@ const AnswerOption = (props) => {
       <h1>{answerText}</h1>
       <button
         onClick={() => {
-          selectThisOption(optionIdx);
+          selectThisOption(optionType);
         }}
       >
         SELECT ME

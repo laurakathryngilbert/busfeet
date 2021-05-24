@@ -5,23 +5,108 @@ import AnswerOption from './AnswerOption';
 const quizContent = [
   {
     questionText: 'question text 1',
-    options: ['optionA', 'optionB', 'optionC', 'optionD'],
+    options: [
+      {
+        optType: 'A',
+        optText: 'optionA',
+      },
+      {
+        optType: 'B',
+        optText: 'optionB',
+      },
+      {
+        optType: 'C',
+        optText: 'optionC',
+      },
+      {
+        optType: 'D',
+        optText: 'optionD',
+      },
+    ],
   },
   {
     questionText: 'question text 2',
-    options: ['optionA', 'optionB', 'optionC', 'optionD'],
+    options: [
+      {
+        optType: 'A',
+        optText: 'optionA',
+      },
+      {
+        optType: 'B',
+        optText: 'optionB',
+      },
+      {
+        optType: 'C',
+        optText: 'optionC',
+      },
+      {
+        optType: 'D',
+        optText: 'optionD',
+      },
+    ],
   },
   {
     questionText: 'question text 3',
-    options: ['optionA', 'optionB', 'optionC', 'optionD'],
+    options: [
+      {
+        optType: 'A',
+        optText: 'optionA',
+      },
+      {
+        optType: 'B',
+        optText: 'optionB',
+      },
+      {
+        optType: 'C',
+        optText: 'optionC',
+      },
+      {
+        optType: 'D',
+        optText: 'optionD',
+      },
+    ],
   },
   {
     questionText: 'question text 4',
-    options: ['optionA', 'optionB', 'optionC', 'optionD'],
+    options: [
+      {
+        optType: 'A',
+        optText: 'optionA',
+      },
+      {
+        optType: 'B',
+        optText: 'optionB',
+      },
+      {
+        optType: 'C',
+        optText: 'optionC',
+      },
+      {
+        optType: 'D',
+        optText: 'optionD',
+      },
+    ],
   },
   {
     questionText: 'question text 5',
-    options: ['optionA', 'optionB', 'optionC', 'optionD'],
+    options: [
+      {
+        optType: 'A',
+        optText: 'optionA',
+      },
+      {
+        optType: 'B',
+        optText: 'optionB',
+      },
+      {
+        optType: 'C',
+        optText: 'optionC',
+      },
+      {
+        optType: 'D',
+        optText: 'optionD',
+      },
+    ],
   },
 ];
 
@@ -39,13 +124,20 @@ class QuizContainer extends React.Component {
 
   selectThisOption(optionLetter) {
     console.log('We are clicking this option:', optionLetter);
+    this.setState({
+      ...this.state,
+      currentQuestionNum: this.state.currentQuestionNum + 1,
+    });
   }
 
   render() {
     // console.log(this.state);
     const currentQuestionPacket = this.state.quizContent[
       this.state.currentQuestionNum
-    ];
+    ] || {
+      questionText: '',
+      options: [],
+    };
     // console.log('currentQuestionPacket:', currentQuestionPacket);
 
     // to destructure, they MUST BE THE EXACT NAMES OF THE KEYS
@@ -55,17 +147,24 @@ class QuizContainer extends React.Component {
 
     return (
       <div>
-        <Question questionText={questionText} />
-        {options.map((answerOption, idx) => {
-          return (
-            <AnswerOption
-              key={idx}
-              optionIdx={idx}
-              answerText={answerOption}
-              selectThisOption={this.selectThisOption}
-            />
-          );
-        })}
+        {this.state.currentQuestionNum <= this.state.quizContent.length - 1 ? (
+          <div>
+            <h1>QUIZ TIME</h1>
+            <Question questionText={questionText} />
+            {options.map((answerObj) => {
+              return (
+                <AnswerOption
+                  key={answerObj.optType}
+                  optionType={answerObj.optType}
+                  answerText={answerObj.optText}
+                  selectThisOption={this.selectThisOption}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <h1>RESULTS TIME</h1>
+        )}
       </div>
     );
   }
