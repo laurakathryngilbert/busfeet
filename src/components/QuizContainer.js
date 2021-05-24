@@ -1,6 +1,7 @@
 import React from 'react';
 import Question from './Question';
 import AnswerOption from './AnswerOption';
+import Results from './Results';
 
 const quizContent = [
   {
@@ -110,6 +111,13 @@ const quizContent = [
   },
 ];
 
+const resultsKey = {
+  A: 'You answered mostly As!',
+  B: 'You answered mostly Bs!',
+  C: 'You answered mostly Cs!',
+  D: 'You answered mostly Ds!',
+};
+
 // possibly make each element in the options array an object so it can have text AS WELL AS what type of option it is, like option A or whatever for scorekeeping, and that can be its key???
 
 class QuizContainer extends React.Component {
@@ -118,6 +126,12 @@ class QuizContainer extends React.Component {
     this.state = {
       quizContent: quizContent,
       currentQuestionNum: 0,
+      scoreObj: {
+        A: 0,
+        B: 0,
+        C: 0,
+        D: 0,
+      },
     };
     this.selectThisOption = this.selectThisOption.bind(this);
   }
@@ -127,11 +141,15 @@ class QuizContainer extends React.Component {
     this.setState({
       ...this.state,
       currentQuestionNum: this.state.currentQuestionNum + 1,
+      scoreObj: {
+        ...this.state.scoreObj,
+        [optionLetter]: this.state.scoreObj[optionLetter] + 1,
+      },
     });
   }
 
   render() {
-    // console.log(this.state);
+    console.log(this.state.scoreObj);
     const currentQuestionPacket = this.state.quizContent[
       this.state.currentQuestionNum
     ] || {
@@ -163,7 +181,7 @@ class QuizContainer extends React.Component {
             })}
           </div>
         ) : (
-          <h1>RESULTS TIME</h1>
+          <Results scoreObj={this.state.scoreObj} resultsKey={resultsKey} />
         )}
       </div>
     );
