@@ -3,25 +3,28 @@ import Question from './Question';
 import AnswerOption from './AnswerOption';
 import Results from './Results';
 
+import '../css/QuizContainer.css';
+
 const quizContent = [
   {
-    questionText: 'question text 1',
+    questionText:
+      'question text 1 is very long la la la la the quick brown fox jumped over the lazy dog',
     options: [
       {
         optType: 'A',
-        optText: 'optionA',
+        optText: 'This answer is quite long alskjf;alwkejgpoaiwjef;laksj;laksj',
       },
       {
         optType: 'B',
-        optText: 'optionB',
+        optText: 'This answer is quite long alskjf;alwkejgpoaiwjef;laksj;laksj',
       },
       {
         optType: 'C',
-        optText: 'optionC',
+        optText: 'This answer is quite long alskjf;alwkejgpoaiwjef;laksj;laksj',
       },
       {
         optType: 'D',
-        optText: 'optionD',
+        optText: 'This answer is quite long alskjf;alwkejgpoaiwjef;laksj;laksj',
       },
     ],
   },
@@ -137,7 +140,7 @@ class QuizContainer extends React.Component {
   }
 
   selectThisOption(optionLetter) {
-    console.log('We are clicking this option:', optionLetter);
+    // console.log('We are clicking this option:', optionLetter);
     this.setState({
       ...this.state,
       currentQuestionNum: this.state.currentQuestionNum + 1,
@@ -156,7 +159,6 @@ class QuizContainer extends React.Component {
       questionText: '',
       options: [],
     };
-    // console.log('currentQuestionPacket:', currentQuestionPacket);
 
     // to destructure, they MUST BE THE EXACT NAMES OF THE KEYS
     const { questionText, options } = currentQuestionPacket;
@@ -164,21 +166,24 @@ class QuizContainer extends React.Component {
     // console.log('options:', options);
 
     return (
-      <div>
+      <div className="container">
         {this.state.currentQuestionNum <= this.state.quizContent.length - 1 ? (
-          <div>
-            <h1>QUIZ TIME</h1>
-            <Question questionText={questionText} />
-            {options.map((answerObj) => {
-              return (
-                <AnswerOption
-                  key={answerObj.optType}
-                  optionType={answerObj.optType}
-                  answerText={answerObj.optText}
-                  selectThisOption={this.selectThisOption}
-                />
-              );
-            })}
+          <div className="quizContainer">
+            <h1 className="quizTime">QUIZ TIME</h1>
+            <Question className="question" questionText={questionText} />
+            <div className="answerContainer">
+              {options.map((answerObj) => {
+                return (
+                  <div key={answerObj.objType} className="answerOption">
+                    <AnswerOption
+                      optionType={answerObj.optType}
+                      answerText={answerObj.optText}
+                      selectThisOption={this.selectThisOption}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ) : (
           <Results scoreObj={this.state.scoreObj} resultsKey={resultsKey} />

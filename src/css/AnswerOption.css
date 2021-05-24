@@ -1,0 +1,18 @@
+.answer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 30%;
+  width: 400px;
+}
+
+.answerText {
+  width: 385px;
+  margin: 0.75em;
+}
+
+.answerButton {
+  margin: 15px;
+  width: 100px;
+  height: 50px;
+}

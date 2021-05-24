@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.quizContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.answerContainer {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.quizTime {
+  color: red;
+}
+
+.answerOption {
+  display: flex;
+  background-color: blue;
+  border-radius: 30px;
+  margin: 5px;
+  justify-content: space-around;
+  width: 400px;
+}
+
+.question {
+  text-align: right;
+}
